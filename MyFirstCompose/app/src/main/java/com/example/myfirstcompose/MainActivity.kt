@@ -78,9 +78,11 @@ fun myScreenContent(names: List<String> = listOf("Nico!", "Mercado Libre", "Digi
 
 //State
 @Composable
-/*Mandando los parametros lo que generamos es un "state hosting" que es una manera interna que tenemos
-de controlar el estado por la funcion que esta llamando
-Esto nos da como beneficio evitar que se dupliquen estados, reusar composables y hacerlo testeables*/
+/*
+Mandando los parametros lo que generamos es un "state hosting" que es una manera interna que tenemos
+de controlar el estado por la funcion que esta llamando.
+Esto nos da como beneficio evitar que se dupliquen estados, reusar composables y hacerlo testeables
+*/
 fun counter(count: Int, updateCount: (Int) -> Unit) {
     Button(
             onClick = { updateCount(count + 1) },

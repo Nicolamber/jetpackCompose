@@ -2,6 +2,7 @@ package com.example.composelayouts
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,11 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideEmphasis
-import androidx.compose.material.Surface
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.setContent
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             ComposeLayoutsTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    PhotographerCard()
+                    setUpView()
                 }
             }
         }
@@ -73,10 +73,40 @@ fun PhotographerCard(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun setUpView() {
+    /*
+    Scaffold le permite implementar una interfaz de usuario con la estructura de diseño básica
+    de Material Design. Te da Slots para los componentes: TopAppBar, BottomAppBar,
+    FloatingActionButton y Drawer.
+    Con el Scaffold te aseguras de colocar esos compoenentes y que funcionen juntos de manera correcta
+     */
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "LayoutsCodelab")
+                },
+                actions = {
+                    IconButton(onClick = { /* doSomething() */ }) {
+                        Icon(Icons.Filled.Favorite)
+                    }
+                }
+            )
+        }
+    ) {  innerPadding ->
+        /*
+        Podemos ver que no solo se puede pasar el inner padding por defecto sino que tambien le podes
+        meter uno customizado
+         */
+        PhotographerCard(Modifier.padding(innerPadding).padding(8.dp))
+    }
+}
+
 @Preview
 @Composable
 fun PhotographerCardPreview() {
     ComposeLayoutsTheme {
-        PhotographerCard()
+        setUpView()
     }
 }
